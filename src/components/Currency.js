@@ -5,10 +5,24 @@ const Currency = () => {
   const {dispatch } = useContext(AppContext);
 
     const changeCurrency = (val)=>{
-            dispatch({
-                type: 'CHG_CURRENCY',
-                payload: val,
-            })
+            if(val === "£"){
+                dispatch({
+                    type: 'CHG_CURRENCY',
+                    payload_left: val,
+                    payload_right: "",
+
+                })
+            }
+            else{
+                dispatch({
+                    type: 'CHG_CURRENCY',
+                    payload_left: "",
+                    payload_right: val,
+
+                })
+
+            }
+            
     }
     
 

@@ -7,7 +7,7 @@ import { CiCircleRemove } from "react-icons/ci"
 
 
 const ExpenseItem = (props) => {
-    const { dispatch } = useContext(AppContext);
+    const { dispatch, currency_left, currency_right} = useContext(AppContext);
     const handleDeleteExpense = () => {
         dispatch({
             type: 'DELETE_EXPENSE',
@@ -40,7 +40,7 @@ const ExpenseItem = (props) => {
     return (
         <tr>
             <td>{props.name}</td>
-            <td>{props.cost}€</td>
+            <td>{currency_left}{props.cost}{currency_right}</td>
             <td><CiCirclePlus size='2.2em' color="green"  onClick={event=> increaseAllocation(props.name)}></CiCirclePlus></td>
             <td><CiCircleMinus size='2.2em' color="red"  onClick={event=> decreaseAllocation(props.name)} ></CiCircleMinus></td>
             <td><CiCircleRemove size='2.2em' color="black" onClick={handleDeleteExpense}></CiCircleRemove></td>	

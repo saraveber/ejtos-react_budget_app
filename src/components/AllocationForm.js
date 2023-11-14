@@ -3,14 +3,17 @@ import { AppContext } from '../context/AppContext';
 import CustomAlert from './CustomAlert'; // Make sure to adjust the path based on your project structure
 
 const AllocationForm = (props) => {
-    const { dispatch,remaining, currency  } = useContext(AppContext);
+    const { dispatch,remaining, currency_left, currency_right  } = useContext(AppContext);
     const [alertMessage, setAlertMessage] = useState('');
     
     
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
     const [action, setAction] = useState('');
-
+    console.log("left:")
+    console.log(currency_left)
+    console.log("right:")
+    console.log(currency_right)
     const submitEvent = () => {
 
         const expense = {
@@ -26,7 +29,7 @@ const AllocationForm = (props) => {
         } 
         else {
             if(cost > remaining) {
-                setAlertMessage("The value cannot exceed remaining funds "+currency + remaining);
+                setAlertMessage("The value cannot exceed remaining funds "+currency_left + remaining+ currency_right+".");
                 setCost("");
                 return;
             }
@@ -66,7 +69,7 @@ const AllocationForm = (props) => {
                         <option defaultValue value="Add" name="Add">Add</option>
                         <option value="Reduce" name="Reduce">Reduce</option>
                     </select>
-                    <span style={{ "position":"relative","right":"-20px"}}> {currency} </span>  
+                    <span style={{ "position":"relative","right":"-20px"}}> {currency_left} </span>  
                     <input
                         required='required'
                         type='number'
@@ -75,6 +78,8 @@ const AllocationForm = (props) => {
                         style={{ marginLeft: '2rem' , size: 10}}
                         onChange={(event) => setCost(event.target.value)}>
                     </input>
+                    <span style={{ "position":"relative","right":"-20px"}}> {currency_right} </span>  
+
                     <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
                         Save
                     </button>

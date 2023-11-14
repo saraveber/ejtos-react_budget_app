@@ -4,7 +4,7 @@ import CustomAlert from './CustomAlert'; // Make sure to adjust the path based o
 
 
 const Budget = () => {
-	const { budget, dispatch,expenses, currency } = useContext(AppContext);
+	const { budget, dispatch,expenses, currency_left, currency_right } = useContext(AppContext);
     const [alertMessage, setAlertMessage] = useState('');
 
 	const changeBudget = (val)=>{
@@ -39,8 +39,9 @@ const Budget = () => {
                 <CustomAlert message={alertMessage} onClose={handleAlertClose} />
             )}
             <div className='alert alert-secondary'>
-                <span>Budget: {currency}</span>
-                <input type="number" step="10" value={budget} onInput={(event)=>changeBudget(event.target.value)}></input>
+                <span>Budget: {currency_left}</span>
+                <input type="number" width="50%" step="10"value={budget} onInput={(event)=>changeBudget(event.target.value)}></input>
+                <span>{currency_right}</span>
             </div>
         </div>
 	);
