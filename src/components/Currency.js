@@ -5,7 +5,7 @@ const Currency = () => {
   const {dispatch } = useContext(AppContext);
 
     const changeCurrency = (val)=>{
-            if(val === "£"){
+            if(val === "£" || val === "$" ){
                 dispatch({
                     type: 'CHG_CURRENCY',
                     payload_left: val,
@@ -32,7 +32,7 @@ return (
             <option value="£">Uk(£)</option>
             <option value="₹">India(₹)</option>
             <option value="€">Europe(€)</option>
-            <option value="CAD">Canada(CAD)</option>
+            <option value="$">Dollar($)</option>
         </select>	
         } 	
     </div>
