@@ -91,6 +91,7 @@ const initialState = {
         { id: "Sales", name: 'Sales', cost: 0 },
         { id: "Human Resource", name: 'Human Resource', cost: 0 },
         { id: "IT", name: 'IT', cost: 0 },
+        { id: "Admin", name: 'Admin', cost: 0 },
     ],
     currency_left: '£',
     currency_right: '',

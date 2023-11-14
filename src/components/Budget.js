@@ -40,7 +40,7 @@ const Budget = () => {
             )}
             <div className='alert alert-secondary'>
                 <span>Budget: {currency_left}</span>
-                <input type="number" width="50%" step="10"value={budget} onInput={(event)=>changeBudget(event.target.value)}></input>
+                <input type="number"  step="10"value={budget} onInput={(event)=>changeBudget(event.target.value)}></input>
                 <span>{currency_right}</span>
             </div>
         </div>
