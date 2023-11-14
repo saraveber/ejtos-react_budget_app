@@ -1,8 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
+import CustomAlert from './CustomAlert'; // Make sure to adjust the path based on your project structure
+
 
 const Budget = () => {
 	const { budget, dispatch,expenses, currency } = useContext(AppContext);
+    const [alertMessage, setAlertMessage] = useState('');
 
 	const changeBudget = (val)=>{
 		const totalExpenses = expenses.reduce((total, item) => {
@@ -11,11 +14,11 @@ const Budget = () => {
 
 		
 		if(val<totalExpenses) {
-			alert("You cannot reduce the budget that is already allocated!");
+			setAlertMessage("You cannot reduce the budget value lower than spending");
 		} 
 
         else if (val>20000){
-            alert("The budget can't exceed 20000!");
+            setAlertMessage("The budget can't exceed 20000!");
         }
         
         
@@ -26,12 +29,20 @@ const Budget = () => {
 			})
 			}
 	}
+    const handleAlertClose = () => {
+        setAlertMessage('');
+    };
 	
 	return (
-		<div className='alert alert-secondary'>
-            <span>Budget: {currency}</span>
-			<input type="number" step="10" value={budget} onInput={(event)=>changeBudget(event.target.value)}></input>
-		</div>
+        <div>
+            {alertMessage && (
+                <CustomAlert message={alertMessage} onClose={handleAlertClose} />
+            )}
+            <div className='alert alert-secondary'>
+                <span>Budget: {currency}</span>
+                <input type="number" step="10" value={budget} onInput={(event)=>changeBudget(event.target.value)}></input>
+            </div>
+        </div>
 	);
 };
 

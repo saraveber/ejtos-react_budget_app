@@ -1,41 +1,50 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
+import CustomAlert from './CustomAlert'; // Make sure to adjust the path based on your project structure
 
 const AllocationForm = (props) => {
     const { dispatch,remaining, currency  } = useContext(AppContext);
-
+    const [alertMessage, setAlertMessage] = useState('');
+    
+    
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
     const [action, setAction] = useState('');
 
     const submitEvent = () => {
 
-        if(cost > remaining) {
-            alert("The value cannot exceed remaining funds  £"+remaining);
-            setCost("");
-            return;
-        }
-
         const expense = {
             name: name,
             cost: parseInt(cost),
         };
         if(action === "Reduce") {
+            console.log("I am reducing")
             dispatch({
                 type: 'RED_EXPENSE',
                 payload: expense,
             });
         } 
         else {
+            if(cost > remaining) {
+                setAlertMessage("The value cannot exceed remaining funds  £" + remaining);
+                setCost("");
+                return;
+            }
             dispatch({
                 type: 'ADD_EXPENSE',
                 payload: expense,
             });
         }
     };
+    const handleAlertClose = () => {
+        setAlertMessage('');
+    };
 
     return (
         <div>
+            {alertMessage && (
+                <CustomAlert message={alertMessage} onClose={handleAlertClose} />
+            )}
             <div className='row'>
                 <div className="input-group mb-3" style={{ marginLeft: '2rem' }}>
                     <div className="input-group-prepend">
