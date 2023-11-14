@@ -26,7 +26,7 @@ const AllocationForm = (props) => {
         } 
         else {
             if(cost > remaining) {
-                setAlertMessage("The value cannot exceed remaining funds  £" + remaining);
+                setAlertMessage("The value cannot exceed remaining funds "+currency + remaining);
                 setCost("");
                 return;
             }
